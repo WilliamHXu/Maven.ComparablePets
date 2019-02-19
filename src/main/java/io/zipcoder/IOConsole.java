@@ -19,17 +19,28 @@ public class IOConsole {
     public Pet askWhatTypeOfPet(){
         System.out.println("What Type Of Pet Do You Have and What's It's Name?");
         String typeOfPets = (in.next()).toLowerCase();
-        String petName = in.next();
-        Pet pet = new Pet(petName);
-        if (typeOfPets == "dog"){
-            pet = new Dog(petName);
+        Pet pet = new Pet();
+        if (typeOfPets.equals("dog")){
+            pet = new Dog(in.next());
         }
-        else if (typeOfPets == "cat"){
-            pet = new Cat(petName);
+        else if (typeOfPets.equals("cat")){
+            pet = new Cat(in.next());
         }
-        else if (typeOfPets == "parrot"){
-            pet = new Parrot(petName);
+        else if (typeOfPets.equals("parrot")){
+            pet = new Parrot(in.next());
         }
         return pet;
     }
+
+    public void printPetArray(Pet[] petArray){
+        String print = "";
+        for (Pet pet : petArray){
+            print += pet.getName() +
+                    " says " + pet.speak() + "\n";
+
+        }
+        System.out.println(print);
+    }
+
+
 }

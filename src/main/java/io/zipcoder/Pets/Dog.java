@@ -6,4 +6,18 @@ public class Dog extends Pet {
         return "Bark!";
     }
 
+    public Dog(String name, Integer age) {
+        super(name, age);
+    }
+
+    public Dog(String name) {
+        super(name);
+    }
+
+    public Dog(Integer age) {
+        super(age);
+    }
+
+    public Dog() {
+    }
 }

@@ -1,8 +1,8 @@
 package io.zipcoder.Pets;
 
 public class Pet {
-    protected String name;
-    protected Integer age;
+    protected static String name;
+    protected static Integer age;
 
     public Pet(String name, Integer age) {
         this.name = name;
