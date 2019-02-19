@@ -1,8 +1,8 @@
 package io.zipcoder.Pets;
 
-public class Pet {
-    protected static String name;
-    protected static Integer age;
+public abstract class Pet implements Comparable<Pet>{
+    protected String name;
+    protected Integer age;
 
     public Pet(String name, Integer age) {
         this.name = name;
@@ -14,7 +14,7 @@ public class Pet {
     }
 
     public Pet(Integer age) {
-        this(name, 0);
+        this("", 0);
     }
 
     public Pet() {
@@ -40,4 +40,31 @@ public class Pet {
     public String speak() {
         return "";
     }
+
+    @Override
+    public String toString(){
+        return String.format("%s says %s", getName(), speak());
+    }
+
+    public int compareTo(Pet petToCompare){
+        if(this.getName().equals(petToCompare.getName())){
+            return this.petTypeString().compareTo(petToCompare.petTypeString());
+        }
+        else {
+            return this.getName().compareTo(petToCompare.getName());
+        }
+    }
+
+    public String petTypeString(){
+        if (this instanceof Cat) {
+            return "cat";
+        }
+        else if (this instanceof Dog) {
+            return "dog";
+        }
+        else {
+            return "parrot";
+        }
+    }
+
 }

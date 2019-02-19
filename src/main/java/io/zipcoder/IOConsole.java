@@ -1,46 +1,90 @@
 package io.zipcoder;
 
-import io.zipcoder.Pets.Cat;
-import io.zipcoder.Pets.Dog;
-import io.zipcoder.Pets.Parrot;
-import io.zipcoder.Pets.Pet;
+/**
+ * @author leon on 03/02/2019.
+ */
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class IOConsole {
-    Scanner in = new Scanner(System.in);
+    private final Scanner scanner;
+    private final PrintStream out;
 
-    public Integer askHowManyPets(){
-        System.out.println("How Many Pets Do You Have?");
-        Integer numberOfPets = in.nextInt();
-        return numberOfPets;
+    public IOConsole() {
+        this(System.in, System.out);
     }
 
-    public Pet askWhatTypeOfPet(){
-        System.out.println("What Type Of Pet Do You Have and What's It's Name?");
-        String typeOfPets = (in.next()).toLowerCase();
-        Pet pet = new Pet();
-        if (typeOfPets.equals("dog")){
-            pet = new Dog(in.next());
-        }
-        else if (typeOfPets.equals("cat")){
-            pet = new Cat(in.next());
-        }
-        else if (typeOfPets.equals("parrot")){
-            pet = new Parrot(in.next());
-        }
-        return pet;
+    public IOConsole(InputStream inputStream, OutputStream outputStream) {
+        this(new Scanner(inputStream), new PrintStream(outputStream));
     }
 
-    public void printPetArray(Pet[] petArray){
-        String print = "";
-        for (Pet pet : petArray){
-            print += pet.getName() +
-                    " says " + pet.speak() + "\n";
-
-        }
-        System.out.println(print);
+    public IOConsole(Scanner scanner, PrintStream printStream) {
+        this.scanner = scanner;
+        this.out = printStream;
     }
 
+    /**
+     * @param val  : text to display on console
+     * @param args : optional arguments to send for string formatting
+     */
+    public void print(String val, Object... args) {
+        out.format(val, args);
+    }
 
+    /**
+     * @param val  : text to display on console
+     * @param args : optional arguments to send for string formatting
+     */
+    public void println(String val, Object... args) {
+        print(val + "\n", args);
+    }
+
+    /**
+     * @param prompt : text to display to user
+     * @param args   : optional arguments to send for string formatting
+     * @return user's input as String
+     */
+    public String getStringInput(String prompt, Object... args) {
+        println(prompt, args);
+        return scanner.nextLine();
+    }
+
+    /**
+     * @param prompt : text to display to user
+     * @param args   : optional arguments to send for string formatting
+     * @return user's input as integer
+     */
+    public Integer getIntegerInput(String prompt, Object... args) {
+        return Integer.parseInt(getStringInput(prompt, args));
+    }
+
+    /**
+     * @param prompt : text to display to user
+     * @param args   : optional arguments to send for string formatting
+     * @return user's input as double
+     */
+    public Double getDoubleInput(String prompt, Object... args) {
+        return Double.parseDouble(getStringInput(prompt, args));
+    }
+
+    /**
+     * @param prompt : text to display to user
+     * @param args   : optional arguments to send for string formatting
+     * @return user's input as float
+     */ // TODO - Change recursion to iteration
+    public Float getFloatInput(String prompt, Object... args) {
+        return Float.parseFloat(getStringInput(prompt, args));
+    }
+
+    /**
+     * @param prompt : text to display to user
+     * @param args   : optional arguments to send for string formatting
+     * @return user's input as long
+     */ // TODO - Change recursion to iteration
+    public Long getLongInput(String prompt, Object... args) {
+        return Long.parseLong(getStringInput(prompt, args));
+    }
 }
