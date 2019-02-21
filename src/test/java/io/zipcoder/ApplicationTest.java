@@ -102,13 +102,13 @@ public class ApplicationTest {
         Pet parrot = new Parrot("Alice");
 
         Pet[] testArray = new Pet[]{dog, cat, parrot};
-        Pet[] expected = new Pet[]{parrot, dog, cat,};
+        Pet[] expected = new Pet[]{cat, dog, parrot,};
         PetSorter testSorter = new PetSorter(testArray);
         PetComparator testComp = new PetComparator();
 
         //When
         Pet[] actual = testSorter.sort(testComp);
 
-        Assert.assertEquals(expected, actual);
+        Assert.assertArrayEquals(expected, actual);
     }
 }
